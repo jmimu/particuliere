@@ -38,4 +38,5 @@ Level.o : Level.cpp Level.h
 	$(CXX) $(CXXFLAGS) -c Level.cpp
 
 clean:
-	rm -f $(ENGINE_OBJS) core
+	rm -f *.o
+
