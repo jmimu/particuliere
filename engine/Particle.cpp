@@ -72,7 +72,7 @@ bool Particle::update()//return true if object is deleted
 
 void Particle::delete_anims()
 {
-	cout<<"delete paricle anims\n";
+	cout<<"delete particle anims\n";
 	for (unsigned int i=0;i<particle_anims.size();i++)
 		delete particle_anims[i];
 	particle_anims.clear();

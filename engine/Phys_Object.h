@@ -38,7 +38,7 @@ class Phys_Object: public Anim_Sprite
 		const int get_rect_size_y(){return rect_size_y;};
 		const float get_mass(){return mass;};
 		sf::Shape * get_rect(){return &rect;};
-		virtual bool update();//return true if object is deleted
+		virtual bool update();//return true if object is to be deleted
 
 		void set_rect_size(int s_x,int s_y);
 		

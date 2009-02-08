@@ -58,5 +58,8 @@ bool R_Level::load_level()
 		//obj->mass=(rand()%3)-1;
 		objs.push_back(obj);
 	}
+	Particle_Src<Particle> *src =new Particle_Src<Particle>(0,0,objs,0,0,0,1,50,10,1.5,0.1,0,0);
+	src->speed_x=10;
+	objs.push_back(src);
 	return true;
 }
