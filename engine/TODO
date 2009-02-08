@@ -1,0 +1,4 @@
+- centrer les coordonnées au centre des pixels !
+- Pour les particules, il faut que le changement d'échelle soit en fonction du centre et pas du coin en haut à gauche
+- peut-etre ne plus effacer les images des particules automatiquement...
+- faire une classe pour chaque type de particule

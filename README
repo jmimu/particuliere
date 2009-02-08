@@ -1,0 +1,15 @@
+Copyright (C) 2008 Jean-Michael MULLER (jean-michael.muller@laposte.net)
+
+
+Intro :
+	
+Compilation :
+	Nécessite la bibliothèque SFML.
+	make all
+	
+Démarrage :
+	./moteur01
+
+Instructions :
+	
+Contrôles :
