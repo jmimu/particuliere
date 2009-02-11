@@ -50,6 +50,7 @@ bool Anim_Sprite::set_anim_image(float time)
 	}
 		
 	this->SetImage(*(anims[position]->get_image((time-time_begin_anim)*animation_speed)));
+	SetCenter(GetImage()->GetWidth ()/2,GetImage()->GetHeight()/2);
 	return true;
 }
 

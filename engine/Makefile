@@ -37,6 +37,6 @@ Camera.o : Camera.cpp Camera.h
 Level.o : Level.cpp Level.h
 	$(CXX) $(CXXFLAGS) -c Level.cpp
 
-clean:
+clear:
 	rm -f *.o
 

@@ -27,7 +27,7 @@ vector <Animation *> Particle::particle_anims;
 int Particle::nbr_particles=0;
 
 Particle::Particle(int part_type)
-	: Phys_Object(0,0),scale_speed(0.0),scale(1.0)
+	: Phys_Object(0,0),scale_speed(0.0),scale(1.0),angle(0.0)
 {
 	//cout<<"One particle to create\n";
 	if (nbr_particles==0) load_particle_animations();
@@ -55,6 +55,9 @@ Particle::~Particle()
 bool Particle::update()//return true if object is deleted
 {
 	Phys_Object::update();
+	angle+=10;
+	this->SetRotation(angle);
+	
 	scale+=scale_speed/10.0;
 	this->SetScale(scale,scale);
 	//cout<<"size : "<<this->GetImage()->GetHeight()<<endl;
@@ -89,7 +92,7 @@ bool Particle::load_particle_animations()
     
     anim_rythm.clear();
     Animation *anim2=new Animation();
-    anim2->load_animation("data/divers/2.png",32,32,anim_rythm);
+    anim2->load_animation("data/divers/spark.png",64,64,anim_rythm);
     particle_anims.push_back(anim2);
     
     //cout<<"Part animations loaded\n";

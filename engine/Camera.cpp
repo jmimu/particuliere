@@ -35,8 +35,8 @@ Camera::~Camera() {
 bool Camera::draw_spr(sf::RenderWindow & App,Anim_Sprite spr)//add the camera shift (x,y) in ground ref 
 {
 	sf::Vector2f spr_size=spr.GetSize();	
-	int x2=spr.x-x+size_x/2-spr_size.x/2;
-	int y2=spr.y-y+size_y/2-spr_size.y/2;
+	int x2=spr.x-x+size_x/2;
+	int y2=spr.y-y+size_y/2;
 	spr.SetPosition(x2,y2);
 	App.Draw(spr);
 	//std::cout<<"Draw "<<_x<<"  "<<_y<<"    "<<x2<<" "<<y2<<std::endl;

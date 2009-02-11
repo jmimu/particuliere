@@ -58,5 +58,6 @@ void Phys_Object::set_rect_size(int s_x,int s_y)
 {
 	rect_size_x=s_x;
 	rect_size_y=s_y;
+	SetCenter(s_x/2,s_y/2);
 	rect= sf::Shape::Rectangle(0, 0, rect_size_x, rect_size_y, sf::Color(0, 255, 255, 100));
 }

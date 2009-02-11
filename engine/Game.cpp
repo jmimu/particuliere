@@ -86,7 +86,7 @@ bool Game::run()
         
         if (App.GetInput().IsKeyDown(sf::Key::X))
         {
-        	Particle_Src<Particle> src1(see_x,see_y,level->get_objs(),0,0,0,1,50,10,3*(int)!spr1.isXflipped(),0.1,0,0);
+        	Particle_Src<Particle> src1(Particle::SPARK,see_x,see_y,level->get_objs(),0,0,0,1,50,10,3*(int)!spr1.isXflipped(),0.1,0,0);
 		}
 
        

@@ -40,12 +40,13 @@ class Particle: public Phys_Object
 	public:
 		Particle(int part_type);
 		~Particle();
-		bool update();//return true if object is deleted
+		virtual bool update();//return true if object is deleted
 		
 		float scale;
 		float scale_speed;
+		float angle;
 	private:
-		/* add your private declarations */
+		
 		static std::vector <Animation *> particle_anims;
 		static int nbr_particles;
 		static void delete_anims();

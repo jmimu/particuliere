@@ -49,7 +49,7 @@ bool R_Level::load_level()
 	//objects
 	for (unsigned int i=0;i<100;i++)
 	{
-		Particle * obj=new Particle(0);
+		Particle * obj=new Particle(Particle::SPARK);
 		obj->x=rand()%600-300;
 		obj->y=rand()%50+150;
 		obj->speed_y=rand()%20-10;
@@ -58,7 +58,7 @@ bool R_Level::load_level()
 		//obj->mass=(rand()%3)-1;
 		objs.push_back(obj);
 	}
-	Particle_Src<Particle> *src =new Particle_Src<Particle>(0,0,objs,0,0,0,1,50,10,1.5,0.1,0,0);
+	Particle_Src<Particle> *src =new Particle_Src<Particle>(Particle::SMOKE,0,0,objs,0,0,0,1,50,10,1.5,0.1,0.01,0.01);
 	src->speed_x=10;
 	objs.push_back(src);
 	return true;

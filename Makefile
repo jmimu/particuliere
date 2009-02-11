@@ -24,6 +24,6 @@ R_Game.o : R_Game.cpp R_Game.h
 R_Level.o : R_Level.cpp R_Level.h
 	$(CXX) $(CXXFLAGS) -c R_Level.cpp
 
-clean:
+clear:
 	rm -f *.o engine/*.o
 

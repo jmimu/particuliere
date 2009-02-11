@@ -47,7 +47,7 @@ class Anim_Sprite: public sf::Sprite
 		
 		const unsigned int get_position(){return position;};
 		const bool is_default_position(){return position==default_position;};
-		float x,y; //actual coord of upper left corner. The sf::Sprite coord are used only for drawing !
+		float x,y; //actual coord of center. The sf::Sprite coord are used only for drawing !
 		bool add_anim(Animation * anim);
 		void set_flipX(bool flip);
 		bool isXflipped(){return Xflipped;};
