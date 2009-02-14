@@ -49,17 +49,19 @@ bool R_Level::load_level()
 	//objects
 	for (unsigned int i=0;i<100;i++)
 	{
-		Particle * obj=new Particle(Particle::SPARK);
+		Particle * obj=new Particle(Particle::SMOKE);
 		obj->x=rand()%600-300;
 		obj->y=rand()%50+150;
 		obj->speed_y=rand()%20-10;
 		obj->scale_speed=-(rand()%5+5)/100.0;
-		obj->mass=-1;
-		//obj->mass=(rand()%3)-1;
 		objs.push_back(obj);
 	}
-	Particle_Src<Particle> *src =new Particle_Src<Particle>(Particle::SMOKE,0,0,objs,0,0,0,1,50,10,1.5,0.1,0.01,0.01);
-	src->speed_x=10;
+	Particle_Src<Particle> *src =new Particle_Src<Particle>(Particle::WATER,0,0,objs,0,0,0,1,50,4,-1.5708,0.1,1,0.1);
+	//src->speed_x=10;
+    Animation *anim1=new Animation();
+    anim1->load_animation("data/divers/1.png",32,32);
+    src->add_anim(anim1);
+	
 	objs.push_back(src);
 	return true;
 }

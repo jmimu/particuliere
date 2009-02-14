@@ -28,6 +28,15 @@
 #include <SFML/Graphics.hpp>
 #include "Animation.h"
 
+/**
+ * SFML Sprite with several animations.
+ * Images are stocked static in every class
+ * 
+ * Needs an enum Type for every class
+ * 
+ * Needs a time counter to know which pictire to draw
+ */
+
 class Anim_Sprite: public sf::Sprite
 {
 	public:
@@ -40,8 +49,8 @@ class Anim_Sprite: public sf::Sprite
 	public:
 		Anim_Sprite();
 		virtual ~Anim_Sprite();
-		bool set_anim_image(float time);
-		bool set_position(unsigned int pos,float time);
+		bool set_anim_image(float time);//find the image of anim with current time and animation begin time
+		bool set_position(unsigned int pos,float time);//set a new position at that time
 		void return_to_default_position(float time){position=default_position;time_begin_anim=time;};
 		bool set_default_position(unsigned int pos);
 		

@@ -1,15 +1,21 @@
-Copyright (C) 2008 Jean-Michael MULLER (jean-michael.muller@laposte.net)
+Copyright (C) 2009 JMM (jmimu@free.fr)
 
 
 Intro :
 	
 Compilation :
-	Nécessite la bibliothèque SFML.
-	make all
+	Needs SFML library (http://sfml-dev.org/).
+	Needs cmake.
+	Needs c++ gnu compiler
 	
-Démarrage :
+	cd out/
+	rm CMakeCache.txt
+	ccmake ..
+	make
+	
+Starting :
 	./moteur01
 
 Instructions :
 	
-Contrôles :
+Controls :

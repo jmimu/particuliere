@@ -65,6 +65,7 @@ class Particle_Src: public Phys_Object
 template<class T>
 double Particle_Src<T>::Random_Gaussian_JM(double m,double s)
 {
+	if (fabs(s)<0.0001) return m;
 	unsigned  n1,n2;
 	double    x1,x2,y;
 	// on ne veut pas que <x1> et <x2> soit nuls
@@ -95,19 +96,20 @@ Particle_Src<T>::Particle_Src(int _part_type,float _x,float _y,std::list <Phys_O
 		float alpha=Random_Gaussian_JM(angle_m,angle_s);
 		obj->speed_x=speed*cos(alpha);
 		obj->speed_y=speed*sin(alpha);
-		obj->scale_speed=-0.1;
-		obj->mass=-1;
+		obj->scale_speed=-0.05;
 		objs.push_back(obj);
 	}
-	std::vector <unsigned int> anim_rythm;
+	/*std::vector <unsigned int> anim_rythm;
     Animation *anim1=new Animation();
     anim1->load_animation("data/divers/1.png",32,32,anim_rythm);
-    anims.push_back(anim1);
+    anims.push_back(anim1);*/
 }
 
 template<class T>
 bool Particle_Src<T>::update()
 {
+	angle_m+=0.2;
+	
 	float to_add=Random_Gaussian_JM(density_m,density_s);
 	if (to_add<0) to_add=0.0;
 	nbr_part_to_throw+=to_add;
@@ -120,8 +122,7 @@ bool Particle_Src<T>::update()
 		float alpha=Random_Gaussian_JM(angle_m,angle_s);
 		obj->speed_x=speed*cos(alpha);
 		obj->speed_y=speed*sin(alpha);
-		obj->scale_speed=-0.1;
-		obj->mass=-1;
+		obj->scale_speed=-0.05;
 		objs.push_back(obj);
 		nbr_part_to_throw--;
 	}

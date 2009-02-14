@@ -82,6 +82,11 @@ bool Animation::load_animation(std::string file_name,unsigned int size_x,unsigne
 	return true;
 }
 
+bool Animation::load_animation(std::string file_name,unsigned int size_x,unsigned int size_y,bool _loop)
+{
+	std::vector <unsigned int> anim_rythm;
+	return load_animation(file_name,size_x,size_y,anim_rythm,_loop);
+}
 
 sf::Image * Animation::get_image(unsigned int time)
 {

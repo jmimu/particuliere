@@ -36,6 +36,7 @@ class Animation
 	public:
 		Animation();
 		virtual ~Animation();
+		bool load_animation(std::string file_name,unsigned int size_x,unsigned int size_y,bool _loop=true);
 		bool load_animation(std::string file_name,unsigned int size_x,unsigned int size_y,std::vector <unsigned int> & time_for_each_image,bool _loop=true);
 		sf::Image * get_image(unsigned int time);
 		unsigned int anim_length(){return timing.size();}

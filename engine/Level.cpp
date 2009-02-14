@@ -44,15 +44,9 @@ void Level::draw(sf::RenderWindow & App,float time)
     //std::cout<<"nbr objs: "<<objs.size()<<std::endl;
     for (list<Phys_Object*>::iterator iter = objs.begin();iter != objs.end();iter++)
     {
-		(*iter)->set_anim_image(time);
-    	cam.draw_spr(App,(**iter),false);
+		if ((*iter)->set_anim_image(time)) cam.draw_spr(App,(**iter),false);//if there is an animation
 	}
 	
-	/*for (unsigned int i=0;i<objs.size();i++)
-    {
-    	objs[i]->set_anim_image(time);
-    	cam.draw_spr(App,(*objs[i]),true);
-    }*/
 }
 
 void Level::update()

@@ -25,12 +25,14 @@
 using namespace std;
 vector <Animation *> Particle::particle_anims;
 int Particle::nbr_particles=0;
+int Particle::masses[3]={-1,0,1};//masses of differents types of particle
 
 Particle::Particle(int part_type)
 	: Phys_Object(0,0),scale_speed(0.0),scale(1.0),angle(0.0)
 {
 	//cout<<"One particle to create\n";
 	if (nbr_particles==0) load_particle_animations();
+	mass=masses[part_type];
 	anims.push_back(particle_anims[part_type]);
 	nbr_particles++;
 	
@@ -85,17 +87,18 @@ bool Particle::load_particle_animations()
 {
 	cout<<"load paricle anims\n";
 	particle_anims.clear();
-	std::vector <unsigned int> anim_rythm;
     Animation *anim1=new Animation();
-    anim1->load_animation("data/divers/smoke.png",64,64,anim_rythm);
+    anim1->load_animation("data/divers/smoke.png",64,64);
     particle_anims.push_back(anim1);
     
-    anim_rythm.clear();
     Animation *anim2=new Animation();
-    anim2->load_animation("data/divers/spark.png",64,64,anim_rythm);
+    anim2->load_animation("data/divers/spark.png",64,64);
     particle_anims.push_back(anim2);
     
-    //cout<<"Part animations loaded\n";
+    Animation *anim3=new Animation();
+    anim3->load_animation("data/divers/water.png",32,32);
+    particle_anims.push_back(anim3);
+	//cout<<"Part animations loaded\n";
     return true;
 }
 

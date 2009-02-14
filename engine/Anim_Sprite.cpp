@@ -43,6 +43,8 @@ void Anim_Sprite::set_flipX(bool flip)
 
 bool Anim_Sprite::set_anim_image(float time)
 {
+	if (anims.size()==0) return false;
+	
 	if ((!anims[position]->is_loop())&&((time-time_begin_anim)*animation_speed>anims[position]->anim_length()))
 	{
 		position=default_position;

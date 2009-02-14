@@ -4,15 +4,12 @@ PROJECT( roues_auto )
 
 SET( ENGINE_PATH "../engine" CACHE PATH "Path to engine" )
 
-#INCLUDE_DIRECTORIES( ${OPENCV_INCLUDE_DIR} ${BOOST_INCLUDE_DIR} )
-#LINK_DIRECTORIES( ${OPENCV_INCLUDE_DIR} ${BOOST_INCLUDE_DIR} )
-
 ADD_EXECUTABLE(
                 moteur01 moteur01.cpp				
                 R_Game.cpp
-				R_Game.h
+		R_Game.h
                 R_Level.cpp
-				R_Level.h
+		R_Level.h
                 ${ENGINE_PATH}/Game.cpp
                 ${ENGINE_PATH}/Game.h
                 ${ENGINE_PATH}/Animation.cpp
@@ -35,6 +32,7 @@ ADD_EXECUTABLE(
                 ${ENGINE_PATH}/Level.h
 )
 
-SET(CMAKE_CXX_FLAGS "-g -Wall -W")
+SET(CMAKE_CXX_FLAGS "-O0 -g -Wall -fmessage-length=0")
 
 TARGET_LINK_LIBRARIES( moteur01 sfml-audio sfml-graphics sfml-window sfml-system)
+

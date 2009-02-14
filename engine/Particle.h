@@ -28,13 +28,22 @@
 #include "Animation.h"
 #include "Phys_Object.h"
 
+/**
+ * Particle class :
+ * simple phys obj with an animation, a rotation and a scale speed
+ * disapears when too little
+ * 
+ * to add : disapears when out of area
+ * */
+
 class Particle: public Phys_Object
 {
 	public:
 		enum Type
 		{
 			SMOKE,
-			SPARK
+			SPARK,
+			WATER
 		};
 		
 	public:
@@ -51,6 +60,8 @@ class Particle: public Phys_Object
 		static int nbr_particles;
 		static void delete_anims();
 		static bool load_particle_animations();
+		
+		static int masses[3];//masses of differents types of particle
 };
 
 #endif /* PARTICLE_H */ 
