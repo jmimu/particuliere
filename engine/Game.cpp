@@ -55,7 +55,8 @@ bool Game::run()
 	//sf::Sprite target;//(target_img);
 	std::vector <unsigned int> anim_rythm;
 	Animation *anim2=new Animation();
-	anim2->load_animation("data/sjm/marche.png",32,64,anim_rythm,false);
+	//anim2->load_animation("data/sjm/marche.png",32,64,anim_rythm,false);
+	anim2->load_animation("data/space/vaiss.png",102,32,anim_rythm,false);
 	spr1.add_anim(anim2);
 	spr1.set_position(0,0);
 	spr1.set_default_position(0);
