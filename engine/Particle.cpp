@@ -31,7 +31,7 @@ Particle::Particle(int part_type)
 	: Phys_Object(0,0),scale_speed(0.0),scale(1.0),angle(0.0)
 {
 	//cout<<"One particle to create\n";
-	if (nbr_particles==0) load_particle_animations();
+	if (particle_anims.size()==0) load_particle_animations();
 	mass=masses[part_type];
 	anims.push_back(particle_anims[part_type]);
 	nbr_particles++;
@@ -51,7 +51,7 @@ Particle::~Particle()
 {
 	//cout<<"One particle destroyed\n";
 	nbr_particles--;
-	if (nbr_particles==0) delete_anims();
+	//if (nbr_particles==0) delete_anims();
 }
 
 bool Particle::update()//return true if object is deleted

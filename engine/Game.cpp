@@ -35,7 +35,7 @@ Game::Game(string window_name,float _FPS)
 
 Game::~Game()
 {
-	
+	Particle::delete_anims();
 }
 
 bool Game::load_level()
@@ -56,7 +56,7 @@ bool Game::run()
 	std::vector <unsigned int> anim_rythm;
 	Animation *anim2=new Animation();
 	//anim2->load_animation("data/sjm/marche.png",32,64,anim_rythm,false);
-	anim2->load_animation("data/space/vaiss.png",102,32,anim_rythm,false);
+	anim2->load_animation("data/space/soucoupe.png",64,27,anim_rythm,false);
 	spr1.add_anim(anim2);
 	spr1.set_position(0,0);
 	spr1.set_default_position(0);
@@ -107,7 +107,7 @@ bool Game::run()
 
         App.Display();
         
-        if (t_int%20==0)std::cout<<level->get_objs().size()<<"   "<<t_int<<"\n";
+        //if (t_int%20==0)std::cout<<level->get_objs().size()<<"   "<<t_int<<"\n";
     }
     return true;
 }

@@ -54,11 +54,13 @@ class Particle: public Phys_Object
 		float scale;
 		float scale_speed;
 		float angle;
+
+		static void delete_anims();
+
 	private:
 		
 		static std::vector <Animation *> particle_anims;
 		static int nbr_particles;
-		static void delete_anims();
 		static bool load_particle_animations();
 		
 		static int masses[3];//masses of differents types of particle
