@@ -25,14 +25,23 @@
 using namespace std;
 vector <Animation *> Particle::particle_anims;
 int Particle::nbr_particles=0;
-int Particle::masses[3]={-1,0,1};//masses of differents types of particle
+double Particle::masses[3]={-1,0,1};//masses of differents types of particle
+double Particle::scale_speeds[3]={0.02,-0.02,-0.01};// differents types of particle
+double Particle::alpha_speeds[3]={2,10,0};// differents types of particle
+double Particle::angle_speeds[3]={0,3,8};// differents types of particle
 
 Particle::Particle(int part_type)
-	: Phys_Object(0,0),scale_speed(0.0),scale(1.0),angle(0.0)
+	: Phys_Object(0,0),scale(1.0),scale_speed(0.0),alpha(255),alpha_speed(0.0),angle(0.0),angle_speed(0.0)
 {
 	//cout<<"One particle to create\n";
-	if (particle_anims.size()==0) load_particle_animations();
+	if (nbr_particles==0) load_particle_animations();
+
+	//relative to the type
 	mass=masses[part_type];
+	scale_speed=scale_speeds[part_type];
+	alpha_speed=alpha_speeds[part_type];
+	angle_speed=angle_speeds[part_type];
+
 	anims.push_back(particle_anims[part_type]);
 	nbr_particles++;
 	
@@ -51,26 +60,28 @@ Particle::~Particle()
 {
 	//cout<<"One particle destroyed\n";
 	nbr_particles--;
-	//if (nbr_particles==0) delete_anims();
+	if (nbr_particles==0) delete_anims();
 }
 
 bool Particle::update()//return true if object is deleted
 {
 	Phys_Object::update();
-	angle+=10;
+	angle+=angle_speed;
 	this->SetRotation(angle);
 	
-	scale+=scale_speed/10.0;
+	scale+=scale_speed;
 	this->SetScale(scale,scale);
 	//cout<<"size : "<<this->GetImage()->GetHeight()<<endl;
 	//->GetWidth()*scale<<"  "<<GetImage()->GetHeight()*scale<<endl;
 	rect_size_x=GetImage()->GetWidth()*scale;
 	rect_size_y=GetImage()->GetHeight()*scale;
 	rect.SetScale(scale,scale);
-	
+
+	alpha-=alpha_speed;
+	SetColor(sf::Color(255,255,255,alpha));
 	//change collision rectangle with scale ?
 	
-	if (scale<0.01) return true; //delete
+	if ((scale<0.01)||(alpha<1.0)) return true; //delete
 	
 	return false;	
 }

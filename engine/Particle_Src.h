@@ -96,7 +96,6 @@ Particle_Src<T>::Particle_Src(int _part_type,float _x,float _y,std::list <Phys_O
 		float alpha=Random_Gaussian_JM(angle_m,angle_s);
 		obj->speed_x=speed*cos(alpha);
 		obj->speed_y=speed*sin(alpha);
-		obj->scale_speed=-0.05;
 		objs.push_back(obj);
 	}
 	/*std::vector <unsigned int> anim_rythm;
@@ -122,7 +121,6 @@ bool Particle_Src<T>::update()
 		float alpha=Random_Gaussian_JM(angle_m,angle_s);
 		obj->speed_x=speed*cos(alpha);
 		obj->speed_y=speed*sin(alpha);
-		obj->scale_speed=-0.05;
 		objs.push_back(obj);
 		nbr_part_to_throw--;
 	}

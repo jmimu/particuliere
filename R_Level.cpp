@@ -53,7 +53,7 @@ bool R_Level::load_level()
 		obj->x=rand()%600-300;
 		obj->y=rand()%50+150;
 		obj->speed_y=rand()%20-10;
-		obj->scale_speed=-(rand()%5+5)/100.0;
+		//obj->scale_speed=-(rand()%5+5)/100.0;
 		objs.push_back(obj);
 	}
 	Particle_Src<Particle> *src =new Particle_Src<Particle>(Particle::WATER,0,0,objs,0,0,0,1,50,4,-1.5708,0.1,1,0.1);
