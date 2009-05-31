@@ -56,15 +56,21 @@ bool Game::run()
 	std::vector <unsigned int> anim_rythm;
 	Animation *anim2=new Animation();
 	//anim2->load_animation("data/sjm/marche.png",32,64,anim_rythm,false);
-	anim2->load_animation("data/space/soucoupe.png",64,27,anim_rythm,false);
+	//anim2->load_animation("data/space/soucoupe.png",64,27,anim_rythm,false);
+	anim2->load_animation("data/space/vaiss.png",102,32,anim_rythm,false);
+	//anim2->load_animation("data/ken.png",70,178,anim_rythm,false);
+	//anim2->load_animation("data/fire.png",54,64,anim_rythm,true);
 	spr1.add_anim(anim2);
 	spr1.set_position(0,0);
 	spr1.set_default_position(0);
-	
+	Particle_Src<Particle> *spr1_smoke=new Particle_Src<Particle>(Particle::SMOKE,0,0,level->get_objs(),0,0,0,0,50,20,3.1416,0.1,1,0.1);
+	spr1_smoke->set_lock(&spr1,-30,0);
+	level->objs.push_back(spr1_smoke);
 	
 	float t=0;
 	int t_int=0;
     bool running=true;
+	int shoot_wait=0;
 	while (running)
 	{
 
@@ -85,9 +91,11 @@ bool Game::run()
         if (App.GetInput().IsKeyDown(sf::Key::B)) spr1.set_position(Anim_Sprite::WALK,t);
         if (App.GetInput().IsKeyDown(sf::Key::Space)) spr1.return_to_default_position(t);
         
-        if (App.GetInput().IsKeyDown(sf::Key::X))
+		if (shoot_wait>0) shoot_wait--;
+        if ((App.GetInput().IsKeyDown(sf::Key::X)) && (shoot_wait<=0))
         {
-        	Particle_Src<Particle> src1(Particle::SPARK,see_x+30*((int)spr1.isXflipped()*2-1),see_y,level->get_objs(),0,0,0,1,50,10,3*(int)!spr1.isXflipped(),0.1,0,0);
+			shoot_wait=10;
+        	Particle_Src<Particle> src1(Particle::BULLET,see_x-30*((int)spr1.isXflipped()*2-1),see_y,level->get_objs(),0,0,0,1,100,10,3.1416*(int)spr1.isXflipped(),0.1,0,0);
 		}
 
        

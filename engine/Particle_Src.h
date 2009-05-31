@@ -43,11 +43,18 @@ class Particle_Src: public Phys_Object
 		//nbr_total_part < 0 : infinite
 		//m : mean, s : sigma
 		//add new Particles to objs
-		Particle_Src(int _part_type,float _x,float _y,std::list <Phys_Object*> &_objs,int size_x,int size_y,int nbr_total_part,unsigned int nbr_part_now,float _speed_m=0,float _speed_s=0,float _angle_m=0,float _angle_s=0,float _density_m=0,float _density_s=0);
+		Particle_Src(int _part_type,float _x,float _y,std::list <Phys_Object*> &_objs,int size_x,int size_y,
+					int nbr_total_part,unsigned int nbr_part_now,
+					float _speed_m=0,float _speed_s=0,float _angle_m=0,float _angle_s=0,float _density_m=0,float _density_s=0);
 		//virtual ~Particle_Src();
 		const bool get_is_finished(){return is_finished;}
 		bool update();
+		void set_lock(Anim_Sprite *_lock,float _lock_x,float _lock_y);
 	private:
+		Anim_Sprite *lock;//locked on a sprite ?
+		float lock_x;//lock shift
+		float lock_y;
+	
 		int part_type;//
 		int particules_remaining;//0 => destroy
 		//params for particles : gaussian law
@@ -81,9 +88,11 @@ double Particle_Src<T>::Random_Gaussian_JM(double m,double s)
 
 template<class T>
 Particle_Src<T>::Particle_Src(int _part_type,float _x,float _y,std::list <Phys_Object *> &_objs,int size_x,int size_y,int nbr_total_part,unsigned int nbr_part_now,float _speed_m,float _speed_s,float _angle_m,float _angle_s,float _density_m,float _density_s)
-	: Phys_Object(size_x,size_y),part_type(_part_type),speed_m(_speed_m),speed_s(_speed_s),angle_m(_angle_m),angle_s(_angle_s),density_m(_density_m),density_s(_density_s),objs(_objs),nbr_part_to_throw(0.0),is_finished(false)
+	: Phys_Object(size_x,size_y),lock(NULL),lock_x(0),lock_y(0),part_type(_part_type),speed_m(_speed_m),speed_s(_speed_s),
+	angle_m(_angle_m),angle_s(_angle_s),density_m(_density_m),density_s(_density_s),objs(_objs),nbr_part_to_throw(0.0),
+	is_finished(false)
 {
-	std::cout<<"create part_src !!\n";
+	//std::cout<<"create part_src !!\n";
 	x=_x;y=_y;
 	mass=0;
 	//std::cout<<"Create a Particle_Src\n";
@@ -95,6 +104,7 @@ Particle_Src<T>::Particle_Src(int _part_type,float _x,float _y,std::list <Phys_O
 		float speed=Random_Gaussian_JM(speed_m,speed_s);
 		float alpha=Random_Gaussian_JM(angle_m,angle_s);
 		obj->speed_x=speed*cos(alpha);
+		if (obj->speed_x<0) obj->set_flipX(true);
 		obj->speed_y=speed*sin(alpha);
 		objs.push_back(obj);
 	}
@@ -105,9 +115,31 @@ Particle_Src<T>::Particle_Src(int _part_type,float _x,float _y,std::list <Phys_O
 }
 
 template<class T>
+void Particle_Src<T>::set_lock(Anim_Sprite *_lock,float _lock_x,float _lock_y)
+{
+	lock=_lock;
+	lock_x=_lock_x;
+	lock_y=_lock_y;
+}
+
+template<class T>
 bool Particle_Src<T>::update()
 {
-	angle_m+=0.2;
+	float angle_m_tmp=angle_m;
+	
+	//add lock speed to particules speeds ??
+	//not now
+	if (lock!=NULL)
+	{
+		y=lock->y+lock_y;
+		if (lock->isXflipped())
+		{
+			x=lock->x-lock_x;
+			angle_m_tmp+=MATH_PI;
+		}else{
+			x=lock->x+lock_x;
+		}
+	}
 	
 	float to_add=Random_Gaussian_JM(density_m,density_s);
 	if (to_add<0) to_add=0.0;
@@ -118,8 +150,9 @@ bool Particle_Src<T>::update()
 		obj->x=x;
 		obj->y=y;
 		float speed=Random_Gaussian_JM(speed_m,speed_s);
-		float alpha=Random_Gaussian_JM(angle_m,angle_s);
+		float alpha=Random_Gaussian_JM(angle_m_tmp,angle_s);
 		obj->speed_x=speed*cos(alpha);
+		if (obj->speed_x<0) obj->set_flipX(true);
 		obj->speed_y=speed*sin(alpha);
 		objs.push_back(obj);
 		nbr_part_to_throw--;
