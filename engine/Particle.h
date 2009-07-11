@@ -44,7 +44,8 @@ class Particle: public Phys_Object
 			SMOKE,
 			SPARK,
 			WATER,
-			BULLET
+			BULLET,
+			FIRE
 		};
 		
 	public:
@@ -66,10 +67,10 @@ class Particle: public Phys_Object
 		static int nbr_particles;
 		static bool load_particle_animations();
 		
-		static double masses[4];//masses of differents types of particle
-		static double scale_speeds[4];// differents types of particle
-		static double alpha_speeds[4];// differents types of particle
-		static double angle_speeds[4];// differents types of particle
+		static double masses[5];//masses of differents types of particle
+		static double scale_speeds[5];// differents types of particle
+		static double alpha_speeds[5];// differents types of particle
+		static double angle_speeds[5];// differents types of particle
 };
 
 #endif /* PARTICLE_H */ 

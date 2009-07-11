@@ -25,7 +25,7 @@
 using namespace std;
 
 Game::Game(string window_name,float _FPS)
-	: FPS(_FPS),App(sf::VideoMode(640, 400, 32), window_name.c_str()),spr1()
+  : FPS(_FPS),App(sf::VideoMode(640, 400, 32), window_name.c_str()),spr1(),spr_fire1()
 {
  	std::cout<<"Create Game\n";
 	App.SetFramerateLimit(FPS);
@@ -66,6 +66,16 @@ bool Game::run()
 	Particle_Src<Particle> *spr1_smoke=new Particle_Src<Particle>(Particle::SMOKE,0,0,level->get_objs(),0,0,0,0,50,20,3.1416,0.1,1,0.1);
 	spr1_smoke->set_lock(&spr1,-30,0);
 	level->objs.push_back(spr1_smoke);
+
+
+	Animation *anim_fire=new Animation();
+	anim_fire->load_animation("data/divers/fire.png",27,64);
+	spr_fire1.add_anim(anim_fire);
+	spr_fire1.x=150;
+	spr_fire1.y=0;
+	
+
+
 	
 	float t=0;
 	int t_int=0;
@@ -111,6 +121,11 @@ bool Game::run()
         spr1.set_anim_image(t);
         spr1.x=see_x;spr1.y=see_y;
         level->cam.draw_spr(App,spr1);
+
+        spr_fire1.set_anim_image(t);
+        level->cam.draw_spr(App,spr_fire1);
+
+
         level->draw_fg(App);
 
         App.Display();

@@ -36,6 +36,7 @@
 class Game //make it virtual ?
 {
 	Anim_Sprite spr1;
+	Anim_Sprite spr_fire1;
 	
 	public:
 		Game(std::string window_name,float _FPS);

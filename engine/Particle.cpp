@@ -25,10 +25,10 @@
 using namespace std;
 vector <Animation *> Particle::particle_anims;
 int Particle::nbr_particles=0;
-double Particle::masses[4]={-1,0,1,0};//masses of differents types of particle
-double Particle::scale_speeds[4]={0.02,-0.02,-0.01,0};// differents types of particle
-double Particle::alpha_speeds[4]={3,10,0,3};// differents types of particle
-double Particle::angle_speeds[4]={0,3,8,0};// differents types of particle
+double Particle::masses[5]={-1,0,1,0,-1};//masses of differents types of particle
+double Particle::scale_speeds[5]={0.02,-0.02,-0.01,0,-0.05};// differents types of particle
+double Particle::alpha_speeds[5]={3,10,0,3,1};// differents types of particle
+double Particle::angle_speeds[5]={0,3,8,0,0};// differents types of particle
 
 Particle::Particle(int part_type)
 	: Phys_Object(0,0),scale(1.0),scale_speed(0.0),alpha(255),alpha_speed(0.0),angle(0.0),angle_speed(0.0)
@@ -99,7 +99,7 @@ bool Particle::load_particle_animations()
 	cout<<"load paricle anims\n";
 	particle_anims.clear();
     Animation *anim1=new Animation();
-    anim1->load_animation("data/divers/smoke.png",64,64);
+    anim1->load_animation("data/divers/smoke2.png",32,32);
     particle_anims.push_back(anim1);
     
     Animation *anim2=new Animation();
@@ -113,6 +113,10 @@ bool Particle::load_particle_animations()
     Animation *anim4=new Animation();
     anim4->load_animation("data/divers/bullet.png",50,13);
     particle_anims.push_back(anim4);
+
+    Animation *anim5=new Animation();
+    anim5->load_animation("data/divers/fire.png",27,64);
+    particle_anims.push_back(anim5);
 
 	//cout<<"Part animations loaded\n";
     return true;
