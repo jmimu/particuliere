@@ -1,0 +1,83 @@
+class Ground_Plane
+!!!133250.cpp!!!	Load_Ground_Planes() : void
+	sf::Image * img1=new sf::Image();
+    img1->LoadFromFile("data/bg0.png");
+    images_bg.push_back(img1);
+    sf::Image * img2=new sf::Image();
+    img2->LoadFromFile("data/bg1.png");
+    images_bg.push_back(img2);
+    sf::Image * img3=new sf::Image();
+    img3->LoadFromFile("data/bg2.png");
+    images_bg.push_back(img3);
+    sf::Image * img4=new sf::Image();
+    img4->LoadFromFile("data/bg3.png");
+    images_bg.push_back(img4);
+    
+    sf::Image * img5=new sf::Image();
+    img5->LoadFromFile("data/fg0.png");
+    images_fg.push_back(img5);
+    sf::Image * img6=new sf::Image();
+    img6->LoadFromFile("data/fg1.png");
+    images_fg.push_back(img6);
+    sf::Image * img7=new sf::Image();
+    img7->LoadFromFile("data/fg2.png");
+    images_fg.push_back(img7);
+!!!133378.cpp!!!	Ground_Plane(in num_image : int, in _scroll_speed : float, in bg : bool = true, in _repeat_x : bool = false, in _repeat_y : bool = false)
+	std::cout<<"Create Ground_Plane\n";
+	if (images_bg.size()+images_fg.size()==0) Load_Ground_Planes();
+	if (bg) spr.SetImage(*images_bg[num_image]);//check ?
+	else spr.SetImage(*images_fg[num_image]);//check ?
+	size_x=spr.GetImage()->GetWidth();
+	size_y=spr.GetImage()->GetHeight();
+	half_size_x=size_x/2;
+	half_size_y=size_y/2;
+!!!133506.cpp!!!	~Ground_Plane()
+	//clean memory
+!!!133634.cpp!!!	draw(inout App : sf::RenderWindow, inout cam : Camera) : bool
+	int nbr_repeat_x=1;
+	int nbr_repeat_y=1;
+	if (repeat_x) nbr_repeat_x=cam.half_res_x()/half_size_x+3;//at least repeat 3 times
+	if (repeat_y) nbr_repeat_y=cam.half_res_y()/half_size_y+3;//at least repeat 3 times
+	
+	if (!repeat_x && !repeat_y)
+	{
+		int x=pos_x-cam.get_x()*scroll_speed-half_size_x+cam.half_res_x();
+		int y=pos_y-cam.get_y()*scroll_speed-half_size_y+cam.half_res_y();
+		spr.SetPosition(x,y);
+		App.Draw(spr);
+	}
+
+	if (repeat_x && !repeat_y)
+	{
+		for (int i=0;i<nbr_repeat_x;i++)
+		{
+			int x=(i-nbr_repeat_x/2)*(half_size_x*2)-half_size_x+cam.half_res_x()+((int)(pos_x-cam.get_x()*scroll_speed))%(half_size_x*2);
+			int y=pos_y-cam.get_y()*scroll_speed-half_size_y+cam.half_res_y();
+			spr.SetPosition(x,y);
+			App.Draw(spr);
+		}
+	}
+	if (repeat_y && !repeat_x)
+	{
+		for (int j=0;j<nbr_repeat_y;j++)
+		{
+			int x=pos_x-cam.get_x()*scroll_speed-half_size_x+cam.half_res_x();
+			int y=(j-nbr_repeat_y/2)*(half_size_y*2)-half_size_y+cam.half_res_y()+((int)(pos_y-cam.get_y()*scroll_speed))%(half_size_y*2);
+			spr.SetPosition(x,y);
+			App.Draw(spr);
+		}
+	}
+	if (repeat_x && repeat_y)
+	{
+		for (int i=0;i<nbr_repeat_x;i++)
+		{
+			for (int j=0;j<nbr_repeat_y;j++)
+			{
+				int x=(i-nbr_repeat_x/2)*(half_size_x*2)-half_size_x+cam.half_res_x()+((int)(pos_x-cam.get_x()*scroll_speed))%(half_size_x*2);
+				int y=(j-nbr_repeat_y/2)*(half_size_y*2)-half_size_y+cam.half_res_y()+((int)(pos_y-cam.get_y()*scroll_speed))%(half_size_y*2);
+				spr.SetPosition(x,y);
+				App.Draw(spr);
+			}
+		}
+	}
+	return true;

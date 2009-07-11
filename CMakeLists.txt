@@ -30,6 +30,8 @@ ADD_EXECUTABLE(
                 ${ENGINE_PATH}/Camera.h
                 ${ENGINE_PATH}/Level.cpp
                 ${ENGINE_PATH}/Level.h
+                ${ENGINE_PATH}/Perso.cpp
+                ${ENGINE_PATH}/Perso.h
 )
 
 SET(CMAKE_CXX_FLAGS "-O0 -g -Wall -fmessage-length=0")

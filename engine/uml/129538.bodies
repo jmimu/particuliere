@@ -1,0 +1,72 @@
+class Particle
+!!!134786.cpp!!!	Particle(in part_type : int)
+	//cout<<"One particle to create\n";
+	if (nbr_particles==0) load_particle_animations();
+
+	//relative to the type
+	mass=masses[part_type];
+	scale_speed=scale_speeds[part_type];
+	alpha_speed=alpha_speeds[part_type];
+	angle_speed=angle_speeds[part_type];
+
+	anims.push_back(particle_anims[part_type]);
+	nbr_particles++;
+	
+	int size_x=(anims[0]->get_image(0.0))->GetWidth();
+	int size_y=(anims[0]->get_image(0.0))->GetHeight();
+	
+	this->SetImage(*(anims[0]->get_image(0.0)));
+	set_rect_size(size_x,size_y);
+	animation_speed=0.5;
+	
+	//cout<<"One particle created\n";
+!!!134914.cpp!!!	~Particle()
+	//cout<<"One particle destroyed\n";
+	nbr_particles--;
+	if (nbr_particles==0) delete_anims();
+!!!135042.cpp!!!	update() : bool
+	Phys_Object::update();
+	angle+=angle_speed;
+	this->SetRotation(angle);
+	
+	scale+=scale_speed;
+	this->SetScale(scale,scale);
+	//cout<<"size : "<<this->GetImage()->GetHeight()<<endl;
+	//->GetWidth()*scale<<"  "<<GetImage()->GetHeight()*scale<<endl;
+	rect_size_x=GetImage()->GetWidth()*scale;
+	rect_size_y=GetImage()->GetHeight()*scale;
+	rect.SetScale(scale,scale);
+
+	alpha-=alpha_speed;
+	SetColor(sf::Color(255,255,255,alpha));
+	//change collision rectangle with scale ?
+	
+	if ((scale<0.01)||(alpha<1.0)) return true; //delete
+	
+	return false;	
+!!!135170.cpp!!!	delete_anims() : void
+	cout<<"delete particle anims\n";
+	for (unsigned int i=0;i<particle_anims.size();i++)
+		delete particle_anims[i];
+	particle_anims.clear();
+!!!135298.cpp!!!	load_particle_animations() : bool
+	cout<<"load paricle anims\n";
+	particle_anims.clear();
+    Animation *anim1=new Animation();
+    anim1->load_animation("data/divers/smoke.png",64,64);
+    particle_anims.push_back(anim1);
+    
+    Animation *anim2=new Animation();
+    anim2->load_animation("data/divers/spark.png",64,64);
+    particle_anims.push_back(anim2);
+    
+    Animation *anim3=new Animation();
+    anim3->load_animation("data/divers/water.png",32,32);
+    particle_anims.push_back(anim3);
+
+    Animation *anim4=new Animation();
+    anim4->load_animation("data/divers/bullet.png",50,13);
+    particle_anims.push_back(anim4);
+
+	//cout<<"Part animations loaded\n";
+    return true;

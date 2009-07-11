@@ -1,0 +1,12 @@
+window_sizes 1270 721 244 1020 577 67
+diagrams
+  active  classdiagram_ref 128002 // classesdiagram
+    1020 577 100 4 0 0
+end
+show_stereotypes
+selected class_ref 129794 // Particle_Src
+open
+  classview_ref 128130 // engine
+  classview_ref 128258 // classesview
+end
+end

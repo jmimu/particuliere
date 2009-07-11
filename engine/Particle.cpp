@@ -25,10 +25,10 @@
 using namespace std;
 vector <Animation *> Particle::particle_anims;
 int Particle::nbr_particles=0;
-double Particle::masses[5]={-1,0,1,0,-1};//masses of differents types of particle
-double Particle::scale_speeds[5]={0.02,-0.02,-0.01,0,-0.05};// differents types of particle
-double Particle::alpha_speeds[5]={3,10,0,3,1};// differents types of particle
-double Particle::angle_speeds[5]={0,3,8,0,0};// differents types of particle
+double Particle::masses[6]={-1,0,1,0,-1,0};//masses of differents types of particle
+double Particle::scale_speeds[6]={0.02,-0.02,-0.01,0,-0.05,-0.001};// differents types of particle
+double Particle::alpha_speeds[6]={3,10,0,3,1,0.5};// differents types of particle
+double Particle::angle_speeds[6]={0,3,8,0,0,4};// differents types of particle
 
 Particle::Particle(int part_type)
 	: Phys_Object(0,0),scale(1.0),scale_speed(0.0),alpha(255),alpha_speed(0.0),angle(0.0),angle_speed(0.0)
@@ -118,7 +118,11 @@ bool Particle::load_particle_animations()
     anim5->load_animation("data/divers/fire.png",27,64);
     particle_anims.push_back(anim5);
 
-	//cout<<"Part animations loaded\n";
+    Animation *anim6=new Animation();
+    anim6->load_animation("data/divers/snowflake.png",30,26);
+    particle_anims.push_back(anim6);
+
+    //cout<<"Part animations loaded\n";
     return true;
 }
 

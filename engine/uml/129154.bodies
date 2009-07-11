@@ -1,0 +1,24 @@
+class Phys_Object
+!!!136066.cpp!!!	Phys_Object(in size_x : int, in size_y : int)
+	/*std::vector <unsigned int> anim_rythm;
+    Animation *anim1=new Animation();
+    anim1->load_animation("data/sjm/debout.png",32,64,anim_rythm);
+    anims.push_back(anim1);
+    
+    anim_rythm.clear();
+    Animation *anim2=new Animation();
+    anim2->load_animation("data/sjm/marche.png",32,64,anim_rythm,false);
+    anims.push_back(anim2);*/
+    
+    //this->SetImage(*(anims[0]->get_image(0.0)));
+!!!136194.cpp!!!	~Phys_Object()
+	
+!!!136834.cpp!!!	update() : bool
+	//if (y>200-rect_size_y) {speed_y=0;mass=-1;}
+	//if (y<-200) {speed_y=0;mass=1;}
+	return false;
+!!!136962.cpp!!!	set_rect_size(in s_x : int, in s_y : int) : void
+	rect_size_x=s_x;
+	rect_size_y=s_y;
+	SetCenter(s_x/2,s_y/2);
+	rect= sf::Shape::Rectangle(0, 0, rect_size_x, rect_size_y, sf::Color(0, 255, 255, 100));

@@ -46,93 +46,93 @@ bool Game::load_level()
 
 bool Game::run()
 {
-	cout<<"Start running game\n";
-	float see_x=0;
-	float see_y=0;
+  cout<<"Start running game\n";
+  float see_x=0;
+  float see_y=0;
 	
-	//sf::Image target_img;
-	//target_img.LoadFromFile("data/target.png");
-	//sf::Sprite target;//(target_img);
-	std::vector <unsigned int> anim_rythm;
-	Animation *anim2=new Animation();
-	//anim2->load_animation("data/sjm/marche.png",32,64,anim_rythm,false);
-	//anim2->load_animation("data/space/soucoupe.png",64,27,anim_rythm,false);
-	anim2->load_animation("data/space/vaiss.png",102,32,anim_rythm,false);
-	//anim2->load_animation("data/ken.png",70,178,anim_rythm,false);
-	//anim2->load_animation("data/fire.png",54,64,anim_rythm,true);
-	spr1.add_anim(anim2);
-	spr1.set_position(0,0);
-	spr1.set_default_position(0);
-	Particle_Src<Particle> *spr1_smoke=new Particle_Src<Particle>(Particle::SMOKE,0,0,level->get_objs(),0,0,0,0,50,20,3.1416,0.1,1,0.1);
-	spr1_smoke->set_lock(&spr1,-30,0);
-	level->objs.push_back(spr1_smoke);
+  //sf::Image target_img;
+  //target_img.LoadFromFile("data/target.png");
+  //sf::Sprite target;//(target_img);
+  std::vector <unsigned int> anim_rythm;
+  Animation *anim2=new Animation();
+  //anim2->load_animation("data/sjm/marche.png",32,64,anim_rythm,false);
+  //anim2->load_animation("data/space/soucoupe.png",64,27,anim_rythm,false);
+  anim2->load_animation("data/space/vaiss.png",102,32,anim_rythm,false);
+  //anim2->load_animation("data/ken.png",70,178,anim_rythm,false);
+  //anim2->load_animation("data/fire.png",54,64,anim_rythm,true);
+  spr1.add_anim(anim2);
+  spr1.set_position(0,0);
+  spr1.set_default_position(0);
+  Particle_Src<Particle> *spr1_smoke=new Particle_Src<Particle>(Particle::SMOKE,0,0,level->get_objs(),0,0,0,0,50,20,3.1416,0.1,1,0.1);
+  spr1_smoke->set_lock(&spr1,-30,0);
+  level->objs.push_back(spr1_smoke);
 
 
-	Animation *anim_fire=new Animation();
-	anim_fire->load_animation("data/divers/fire.png",27,64);
-	spr_fire1.add_anim(anim_fire);
-	spr_fire1.x=150;
-	spr_fire1.y=0;
+  Animation *anim_fire=new Animation();
+  anim_fire->load_animation("data/divers/fire.png",27,64);
+  spr_fire1.add_anim(anim_fire);
+  spr_fire1.x=150;
+  spr_fire1.y=0;
 	
 
 
 	
-	float t=0;
-	int t_int=0;
-    bool running=true;
-	int shoot_wait=0;
-	while (running)
-	{
+  float t=0;
+  int t_int=0;
+  bool running=true;
+  int shoot_wait=0;
+  while (running)
+    {
 
-        sf::Event Event;
-        while (App.GetEvent(Event))
+      sf::Event Event;
+      while (App.GetEvent(Event))
         {
-			if ((Event.Type==sf::Event::Closed)||((Event.Type==sf::Event::KeyPressed)&&(Event.Key.Code==sf::Key::Escape)))
-				return EXIT_SUCCESS;
+	  if ((Event.Type==sf::Event::Closed)||((Event.Type==sf::Event::KeyPressed)&&(Event.Key.Code==sf::Key::Escape)))
+	    return EXIT_SUCCESS;
         }
-        get_input();
+      get_input();
         
-        //std::cout<<"look at "<<see_x<<" "<<see_y<<std::endl;        
-        if (App.GetInput().IsKeyDown(sf::Key::Left)) {see_x-=5;spr1.set_flipX(true);if (spr1.is_default_position()) spr1.set_position(Anim_Sprite::WALK,t);}
-        if (App.GetInput().IsKeyDown(sf::Key::Right)) {see_x+=5;spr1.set_flipX(false);if (spr1.is_default_position()) spr1.set_position(Anim_Sprite::WALK,t);}
-        if (App.GetInput().IsKeyDown(sf::Key::Up)) see_y-=5;
-        if (App.GetInput().IsKeyDown(sf::Key::Down)) see_y+=5;
-        if (App.GetInput().IsKeyDown(sf::Key::A)) spr1.set_position(Anim_Sprite::STAND,t);
-        if (App.GetInput().IsKeyDown(sf::Key::B)) spr1.set_position(Anim_Sprite::WALK,t);
-        if (App.GetInput().IsKeyDown(sf::Key::Space)) spr1.return_to_default_position(t);
+      //std::cout<<"look at "<<see_x<<" "<<see_y<<std::endl;        
+      if (App.GetInput().IsKeyDown(sf::Key::Left)) {see_x-=5;spr1.set_flipX(true);if (spr1.is_default_position()) spr1.set_position(Anim_Sprite::WALK,t);}
+      if (App.GetInput().IsKeyDown(sf::Key::Right)) {see_x+=5;spr1.set_flipX(false);if (spr1.is_default_position()) spr1.set_position(Anim_Sprite::WALK,t);}
+      if (App.GetInput().IsKeyDown(sf::Key::Up)) see_y-=5;
+      if (App.GetInput().IsKeyDown(sf::Key::Down)) see_y+=5;
+      if (App.GetInput().IsKeyDown(sf::Key::A)) spr1.set_position(Anim_Sprite::STAND,t);
+      if (App.GetInput().IsKeyDown(sf::Key::B)) spr1.set_position(Anim_Sprite::WALK,t);
+      if (App.GetInput().IsKeyDown(sf::Key::Space)) spr1.return_to_default_position(t);
         
-		if (shoot_wait>0) shoot_wait--;
-        if ((App.GetInput().IsKeyDown(sf::Key::X)) && (shoot_wait<=0))
+      if (shoot_wait>0) shoot_wait--;
+      if ((App.GetInput().IsKeyDown(sf::Key::X)) && (shoot_wait<=0))
         {
-			shoot_wait=10;
-        	Particle_Src<Particle> src1(Particle::BULLET,see_x-30*((int)spr1.isXflipped()*2-1),see_y,level->get_objs(),0,0,0,1,100,10,3.1416*(int)spr1.isXflipped(),0.1,0,0);
-		}
+	  shoot_wait=10;
+	  Particle_Src<Particle> src1(Particle::BULLET,see_x-30*((int)spr1.isXflipped()*2-1),see_y,level->get_objs(),0,0,0,1,100,10,3.1416*(int)spr1.isXflipped(),0.1,0,0);
+	}
 
        
-        t+=0.2;
-        t_int++;
-        if (t>=100000000.) t=0;
-        level->update();
-   		level->cam.set_position(see_x,see_y);
+      t+=0.2;
+      t_int++;
+      if (t>=100000000.) t=0;
+      level->update();
+      level->cam.set_position(see_x,see_y);
         
-        level->draw(App,t);
+      level->draw(App,t);
         
  
-        spr1.set_anim_image(t);
-        spr1.x=see_x;spr1.y=see_y;
-        level->cam.draw_spr(App,spr1);
+      spr1.set_anim_image(t);
+      spr1.x=see_x;spr1.y=see_y;
+      level->cam.draw_spr(App,spr1);
 
-        spr_fire1.set_anim_image(t);
-        level->cam.draw_spr(App,spr_fire1);
+      spr_fire1.set_anim_image(t);
+      level->cam.draw_spr(App,spr_fire1);
 
 
-        level->draw_fg(App);
+      level->draw_fg(App);
 
-        App.Display();
+      App.Display();
         
-        //if (t_int%20==0)std::cout<<level->get_objs().size()<<"   "<<t_int<<"\n";
+      //if (t_int%20==0)std::cout<<level->get_objs().size()<<"   "<<t_int<<"\n";
     }
-    return true;
+  return true;
 }
 
 bool Game::get_input()

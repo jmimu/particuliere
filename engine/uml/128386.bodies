@@ -1,0 +1,43 @@
+class Level
+!!!133762.cpp!!!	Level()
+	std::cout<<"Create Level\n";
+	
+!!!133890.cpp!!!	~Level()
+	//delete background, foreground, objects
+
+!!!134018.cpp!!!	draw(inout App : sf::RenderWindow, in time : float) : void
+    draw_bg(App);
+    
+    //std::cout<<"nbr objs: "<<objs.size()<<std::endl;
+    for (list<Phys_Object*>::iterator iter = objs.begin();iter != objs.end();iter++)
+    {
+		if ((*iter)->set_anim_image(time)) cam.draw_spr(App,(**iter),false);//if there is an animation
+	}
+	
+!!!134146.cpp!!!	load_level() : bool
+	return true;
+!!!134274.cpp!!!	update() : void
+	for (list<Phys_Object*>::iterator iter = objs.begin();iter != objs.end();iter++)
+    {
+    	//std::cout<<"   speed x : "<<(*iter)->speed_x<<" "<<(*iter)->x<<"\n";
+    	(*iter)->speed_y+=(*iter)->mass*gravity_value/10.0;
+    	(*iter)->x+=(*iter)->speed_x/10.0;
+    	(*iter)->y+=(*iter)->speed_y/10.0;
+    	if ((*iter)->update())
+    	{
+    		//destroy
+    		Phys_Object * obj= *iter;
+    		delete obj;
+    		iter=objs.erase( iter ); 		
+		}
+    }
+!!!134530.cpp!!!	draw_bg(inout App : sf::RenderWindow) : void
+	for (unsigned int i=0;i<bg.size();i++)
+    {
+    	bg[i].draw(App,cam);
+    }
+!!!134658.cpp!!!	draw_fg(inout App : sf::RenderWindow) : void
+	for (unsigned int i=0;i<fg.size();i++)
+    {
+    	fg[i].draw(App,cam);
+    }

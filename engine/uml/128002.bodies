@@ -1,0 +1,10 @@
+class R_Game
+!!!128002.cpp!!!	R_Game(in _FPS : float = 50.)
+	std::cout<<"Create R_Game\n";	
+	load_level();
+!!!128130.cpp!!!	~R_Game()
+	
+!!!128258.cpp!!!	load_level() : bool
+	std::cout<<"load_level\n";	
+	level = new R_Level();
+	return true;

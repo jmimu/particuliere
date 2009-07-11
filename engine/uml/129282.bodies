@@ -1,0 +1,13 @@
+class divers
+!!!132226.cpp!!!	Random_Gaussian_JM(in m : double, in s : double) : double
+	unsigned  n1,n2;
+	double    x1,x2,y;
+	// on ne veut pas que <x1> et <x2> soit nuls
+	while((n1 = rand(),0 == n1));
+	while((n2 = rand(),0 == n2));
+	x1 = n1/((double)(unsigned)(-2));
+	x2 = n2/((double)(unsigned)(-2));
+	// methode de Boc-Muller
+	// <y> suit une loi normale reduite (m=0,s=1)
+	y = sqrt(-2*log(x1))*cos(2.*MATH_PI*x2);
+	return m + s*y;

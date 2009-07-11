@@ -1,0 +1,34 @@
+class Camera
+!!!131074.cpp!!!	Camera(in _x : float, in _y : float, in _size_x : int, in _size_y : int, in _min_x : float, in _min_y : float, in _max_x : float, in _max_y : float)
+
+!!!131202.cpp!!!	~Camera()
+
+!!!131330.cpp!!!	set_position(in interest_x : float, in interest_y : float) : void
+	//std::cout<<"camera at "<<x<<" "<<y<<std::endl;
+	//std::cout<<"invert_speed "<<invert_speed<<std::endl;
+	if (interest_x-inertia>x) x+=(interest_x-inertia-x)/invert_speed;
+	if (interest_x+inertia<x) x+=(interest_x+inertia-x)/invert_speed;
+	if (interest_y-inertia>y) y+=(interest_y-inertia-y)/invert_speed;
+	if (interest_y+inertia<y) y+=(interest_y+inertia-y)/invert_speed;
+	if (x<min_x) x=min_x;
+	if (y<min_y) y=min_y;
+	if (x>max_x) x=max_x;
+	if (y>max_y) y=max_y;
+!!!131970.cpp!!!	draw_spr(inout App : sf::RenderWindow, in spr : Anim_Sprite) : bool
+	sf::Vector2f spr_size=spr.GetSize();	
+	int x2=spr.x-x+size_x/2;
+	int y2=spr.y-y+size_y/2;
+	spr.SetPosition(x2,y2);
+	App.Draw(spr);
+	//std::cout<<"Draw "<<_x<<"  "<<_y<<"    "<<x2<<" "<<y2<<std::endl;
+	return true;
+!!!132098.cpp!!!	draw_spr(inout App : sf::RenderWindow, in spr : Phys_Object, in draw_shape : bool = false) : bool
+	if (draw_shape)
+	{
+		int x2=spr.x-x+size_x/2;
+		int y2=spr.y-y+size_y/2;
+		spr.get_rect()->SetPosition(x2,y2);
+		App.Draw(*spr.get_rect());
+	}
+
+	return draw_spr(App,(Anim_Sprite) spr);//draw picture

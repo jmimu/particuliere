@@ -1,0 +1,32 @@
+class Anim_Sprite
+!!!128770.cpp!!!	Anim_Sprite()
+
+!!!128898.cpp!!!	~Anim_Sprite()
+	
+!!!129026.cpp!!!	set_anim_image(in time : float) : bool
+	if (anims.size()==0) return false;
+	
+	if ((!anims[position]->is_loop())&&((time-time_begin_anim)*animation_speed>anims[position]->anim_length()))
+	{
+		position=default_position;
+		time_begin_anim=time;
+	}
+		
+	this->SetImage(*(anims[position]->get_image((time-time_begin_anim)*animation_speed)));
+	SetCenter(GetImage()->GetWidth ()/2,GetImage()->GetHeight()/2);
+	return true;
+!!!129154.cpp!!!	set_position(in pos : uint, in time : float) : bool
+	if (pos>=anims.size()) return false;
+	position=pos;
+	time_begin_anim=time;
+	return true;
+!!!129410.cpp!!!	set_default_position(in pos : uint) : bool
+	if (pos>=anims.size()) return false;
+	default_position=pos;
+	return true;
+!!!129794.cpp!!!	add_anim(inout anim : Animation) : bool
+	anims.push_back(anim);
+	return true;
+!!!129922.cpp!!!	set_flipX(in flip : bool) : void
+	FlipX(flip);
+	Xflipped=flip;

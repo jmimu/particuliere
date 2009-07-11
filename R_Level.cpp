@@ -69,6 +69,9 @@ bool R_Level::load_level()
   Particle_Src<Particle> *fire1 =new Particle_Src<Particle>(Particle::FIRE,150,0,objs,0,0,0,1, 10,1,-1.5708,0.1, 0.1,0.1);
   objs.push_back(fire1);
 
+  Particle_Src<Particle> *snow1 =new Particle_Src<Particle>(Particle::SNOW,-500,-500,objs,0,0,0,1, 30,1,0.8,0.2, 0.5,0.5);
+  objs.push_back(snow1);
+
 
   return true;
 }
